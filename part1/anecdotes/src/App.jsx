@@ -29,11 +29,30 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+ 
+
+  const initialVotes = {};
+  anecdotes.forEach((_,i) => {
+    initialVotes[i] = 0;
+  })
+
+  const updateVotes = () => {
+    const current = selected;
+    const copy = {...votes };
+    copy[current]  += 1;
+    setVotes(copy);
+  };
+  // This set votes first copy the votes object and after that it goes to cuurent index and increase its votes specifically
+
+   const [votes , setVotes] = useState(initialVotes)
 
   return (
     <div>
       <div>{anecdotes[selected]}</div>
+      <div>has {votes[selected]} votes</div>
+      <Button onClick={updateVotes} text="vote"/>
       <Button onClick={ () => setSelected(getRandomIntInclusive(0,7))} text="next anectode"></Button>
+      
     </div>
   )
 }
