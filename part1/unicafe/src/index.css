@@ -1,3 +1,10 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f8f9fa;
+  margin : 0;
+  padding : 20px ; 
+}
+
 div {
   margin-bottom: 10px;
 }
@@ -6,4 +13,21 @@ button {
   margin-right: 10px;
   padding: 8px 18px;
   font-size: 1rem;
+  border-radius: 4px;
+  border : 1px solid #ccc;
+  background : #e9ecef;
+
+}
+
+.statistic-line {
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  
+}
+
+.statistic-title {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-top:15px;
+  margin-bottom: 15px;
 }

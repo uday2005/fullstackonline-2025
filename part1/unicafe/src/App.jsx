@@ -8,21 +8,30 @@ const Button = (props) => {
   )
 }
 
-const Statistics = (props) => { 
 
-  return(
+const StatisticLine = (props) => {
+  return (
     <>
-     <div> statistics </div>
-      <div> good {props.good}</div>  
-      <div> neutral {props.neutral}</div>    
-      <div> bad {props.bad}</div> 
-      <div> all {props.all}</div>  
-      <div>average {(props.good*1 + props.neutral*0 + props.bad*-1)/props.all}</div>
-      <div>positive {(props.good /props.all)*100} %</div>
+    <div className='statistic-line'>{props.text} {props.value} </div>
     </>
   )
 
 }
+
+const Statistics = (props) => { 
+  return(
+    <>
+      <div className='statistic-title'>   STATISTICS    </div>
+      <StatisticLine text="good" value={props.good}/>
+      <StatisticLine text="neutral" value={props.neutral}/>    
+      <StatisticLine text="bad" value={props.bad}/>    
+      <StatisticLine text="all" value={props.all}/>    
+      <StatisticLine text="average" value={(props.good*1 + props.neutral*0 + props.bad*-1)/props.all}/>
+      <StatisticLine text="positive"  value={((props.good /props.all)*100).toFixed(1)+"%"}/>
+    </>
+  )
+}
+
 const App = () => {
   const [good , setGood] = useState(0)
   const [neutral , setNeutral] = useState(0)
