@@ -2,11 +2,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f8f9fa;
   margin : 0;
-  padding : 20px ; 
-}
-
-div {
-  margin-bottom: 10px;
+  padding:8px;
 }
 
 button {
@@ -22,7 +18,7 @@ button {
 .statistic-line {
   margin-bottom: 6px;
   font-size: 1.1rem;
-  
+
 }
 
 .statistic-title {
@@ -30,4 +26,16 @@ button {
   font-size: 1.3rem;
   margin-top:15px;
   margin-bottom: 15px;
+}
+
+
+.feedback-info{
+  margin-top: 8px;
+  font-size: 1.1rem;
+}
+
+.feedback-info2 {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
 }

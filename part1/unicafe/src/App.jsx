@@ -12,7 +12,10 @@ const Button = (props) => {
 const StatisticLine = (props) => {
   return (
     <>
-    <div className='statistic-line'>{props.text} {props.value} </div>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
     </>
   )
 
@@ -22,12 +25,16 @@ const Statistics = (props) => {
   return(
     <>
       <div className='statistic-title'>   STATISTICS    </div>
-      <StatisticLine text="good" value={props.good}/>
-      <StatisticLine text="neutral" value={props.neutral}/>    
-      <StatisticLine text="bad" value={props.bad}/>    
-      <StatisticLine text="all" value={props.all}/>    
-      <StatisticLine text="average" value={(props.good*1 + props.neutral*0 + props.bad*-1)/props.all}/>
-      <StatisticLine text="positive"  value={((props.good /props.all)*100).toFixed(1)+"%"}/>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={props.good}/>
+          <StatisticLine text="neutral" value={props.neutral}/>    
+          <StatisticLine text="bad" value={props.bad}/>    
+          <StatisticLine text="all" value={props.all}/>    
+          <StatisticLine text="average" value={(props.good*1 + props.neutral*0 + props.bad*-1)/props.all}/>
+          <StatisticLine text="positive"  value={((props.good /props.all)*100).toFixed(1)+"%"}/>
+        </tbody>
+      </table>
     </>
   )
 }
@@ -49,12 +56,12 @@ const App = () => {
   console.log("positive" , positive)
   return (
     <div>
-      <div> give feedback </div>
+      <div className="feedback-info2"> Give Feedback </div>
       <Button onClick={handleGood} text="good"/>
       <Button onClick={handleNeutral} text="neutral"/>
       <Button onClick={handleBad} text="bad"/>
       {all > 0 ?
-         (<Statistics good={good} bad={bad} neutral={neutral} all={all}></Statistics>) : <div> No feedback given </div>
+         (<Statistics good={good} bad={bad} neutral={neutral} all={all}></Statistics>) : <div className="feedback-info"> No feedback given </div>
      
       }
       </div>
