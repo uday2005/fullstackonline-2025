@@ -44,16 +44,36 @@ const App = () => {
   };
   // This set votes first copy the votes object and after that it goes to cuurent index and increase its votes specifically
 
-   const [votes , setVotes] = useState(initialVotes)
+   const [votes , setVotes] = useState(initialVotes);
+  //  console.log("initial votes "+initialVotes);
 
+   let max = 0;
+   let max_key = 0;
+   Object.entries(votes).forEach(([key , val]) => {
+       if (val > max) {
+        max = val ; 
+        max_key = key;
+       }
+   });
+  //  console.log(Object.entries(votes));
   return (
+    <>
     <div>
-      <div>{anecdotes[selected]}</div>
+      <h2>Anectodes of the day </h2>
+      <div className="anectode">{anecdotes[selected]}</div>
       <div>has {votes[selected]} votes</div>
       <Button onClick={updateVotes} text="vote"/>
       <Button onClick={ () => setSelected(getRandomIntInclusive(0,7))} text="next anectode"></Button>
-      
     </div>
+
+    <div>
+      <h2>Anectodes with most votes </h2>
+      <div className="anectode">{anecdotes[max_key]}</div>
+      <div>has {votes[max_key]}votes</div>
+    </div>
+
+    </>
+
   )
 }
 
