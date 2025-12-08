@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+
 
 const Header = (props) => <h1>{props.course}</h1>
 
@@ -21,15 +21,20 @@ const Part = (props) => (
 
 const Course = (course) => {
   console.log("course" , course);
+  console.log(course.course.parts[0].exercises)
+  const sum = course.course.parts.reduce((accumulator,part) => accumulator+part.exercises , 0)
+  // const total = course.course.parts[0].exercises + course.course.parts[1].exercises + course.course.parts[2].exercises;
+  console.log(sum);
   return(
   <div>
   <Header course={course.course.name} />
   <Content parts={course.course.parts} />
+  <Total total={sum}/>
   </div>
   )
 }
 
-const Total = (props) => <p>Number of exercises {props.total}</p>
+const Total = (props) => <p>total of {props.total}  exercises</p>
 
 const App = () => {
   const course = {
