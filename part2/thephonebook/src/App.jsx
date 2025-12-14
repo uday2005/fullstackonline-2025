@@ -10,10 +10,19 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
+    const isAlready = persons.some(person => person.name === newName)
+      // we using some here as it is non-mutable  it means it does not change the array.
+      if (isAlready=== true){
+        alert(newName + " is already added to phonebook")
+        return;
+      }
+      
     const newPerson = {
       name : newName,
       id : persons.length + 1
     };
+
+    
 
     const name= [...persons,newPerson];
     setPersons(name);
