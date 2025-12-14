@@ -2,6 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
+import Filter from './components/Filter';
+import PersonForm from './components/PersonForm';
+import Persons from './components/Persons';
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -57,32 +61,16 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-
-    <div>
-      filter shown with <input onChange={handleNamef} value={namef}/>
-    </div>
-    
-      <form onSubmit={addPerson}>
-        <div>New info</div>
-        <div>
-          name: <input onChange={handleNameChange} value={newName}/>
-        </div>
-        <div>
-          number: <input onChange={handleNumberChange} value={numbers}/>
-        </div>
-        <div>
-
-        </div>
-        <div>
-          <button type="submit"> add</button>
-        </div>
-      </form>
+      <Filter onChange={handleNamef} value={namef}/>
+      <PersonForm
+      onSubmit={addPerson}
+      nameValue={newName}
+      onNameChange={handleNameChange}
+      numberValue={numbers}
+      onNumberChange={handleNumberChange}
+                                        />
       <h2>Numbers</h2>
-        {
-        persons
-            .filter(person => person.name.toLowerCase().includes(namef.toLowerCase())) // filter expects a boolean check 
-            .map(person => <div key = {person.id}> {person.name} ----- {person.number}</div>)
-        }
+      <Persons persons={persons} namef={namef}/>
     </div>
   )
 }
