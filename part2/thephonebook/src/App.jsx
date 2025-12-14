@@ -4,8 +4,12 @@ import viteLogo from '/vite.svg'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ]) 
+
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -19,28 +23,55 @@ const App = () => {
       
     const newPerson = {
       name : newName,
-      id : persons.length + 1
+      id : persons.length + 1,
+      number : numbers,
     };
 
-    
-
-    const name= [...persons,newPerson];
-    setPersons(name);
-    setNewName('')
+    const info= [...persons,newPerson];
+    // copy the persons list and then add new person in that list.
+    setPersons(info);
+    setNewName('');
+    setNumbers('');
 
   }
   const [newName, setNewName] = useState('')
+  const [numbers , setNumbers] = useState('')
+  const [namef , setNamef] = useState('')
 
-    const handleNameChange = (event) => {
-      console.log(event.target.value);
-      setNewName(event.target.value);
-    }
+
+  const handleNameChange = (event) => {
+    console.log(event.target.value);
+    setNewName(event.target.value);
+      }
+
+  const  handleNumberChange = (event) => {
+    console.log(event.target.value);
+    setNumbers(event.target.value);
+  }
+
+  const handleNamef = (event) => {
+    console.log(event.target.value);
+    setNamef(event.target.value);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+
+    <div>
+      filter shown with <input onChange={handleNamef} value={namef}/>
+    </div>
+    
       <form onSubmit={addPerson}>
+        <div>New info</div>
         <div>
           name: <input onChange={handleNameChange} value={newName}/>
+        </div>
+        <div>
+          number: <input onChange={handleNumberChange} value={numbers}/>
+        </div>
+        <div>
+
         </div>
         <div>
           <button type="submit"> add</button>
@@ -48,7 +79,9 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
         {
-        persons.map(person => <div key = {person.id}> {person.name}</div>)
+        persons
+            .filter(person => person.name.toLowerCase().includes(namef.toLowerCase())) // filter expects a boolean check 
+            .map(person => <div key = {person.id}> {person.name} ----- {person.number}</div>)
         }
     </div>
   )
