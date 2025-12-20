@@ -2,7 +2,7 @@ import { useState , useEffect } from 'react'
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-
+import Notifications  from './components/Notifications';
 import personService from './services/persons';
 
 
@@ -24,13 +24,21 @@ const App = () => {
   useEffect(fetchPersons , []);
 
   const handleClick = (id) => {
-    
+    const nam = persons.find(person => person.id === id)
       if (window.confirm("Do you want to delete this user")) {
           personService
           .deleteP(id) // return the promise to delete 
           .then(() => {
           setPersons(prev => prev.filter(p => p.id !== id)) // filter out the persons which is not with id it is being deletd
                         })
+          .catch( (error) => {
+            setErrorMessage(`Information of ${nam.name} has already been removed from the server`)
+            setTimeout( () => {
+              setErrorMessage(null)
+            },5000)
+            setPersons(prev => prev.filter(p => p.id !== id)) 
+          })
+                  
       } else {
         return ;
       }
@@ -87,12 +95,14 @@ const App = () => {
       setPersons(prev => prev.concat(person));
       setNewName('');
       setNumbers('');
-
-      
-    }) 
+      setConfirmMessage(
+          ` Addesd ${newName}`
+        )
+        setTimeout( () => {
+          setConfirmMessage(null)
+        },5000)
+    })
       }
-      
-    
 
     }
 
@@ -102,8 +112,10 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [numbers , setNumbers] = useState('')
   const [namef , setNamef] = useState('')
+  const [confirmMessage , setConfirmMessage] = useState(null)
+  const [errorMessage , setErrorMessage] = useState(null)
 
-
+  console.log("confrim message", confirmMessage)
   const handleNameChange = (event) => {
     console.log(event.target.value);
     setNewName(event.target.value);
@@ -120,9 +132,11 @@ const App = () => {
   }
 
 
+
   return(
     <div>
       <h2>Phonebook</h2>
+      <Notifications  confirmMessage={confirmMessage} errorMessage={errorMessage}/>
       <Filter onChange={handleNamef} value={namef}/>
       <PersonForm
       onSubmit={addPerson}
